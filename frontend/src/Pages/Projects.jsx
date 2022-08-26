@@ -11,9 +11,15 @@ import {
   Grid,
   Flex,
   Checkbox,
+  Accordion,
+  AccordionItem,
+  AccordionButton,
+  AccordionIcon,
+  AccordionPanel,
 } from "@chakra-ui/react";
 import { SearchIcon, ChevronDownIcon, UpDownIcon } from "@chakra-ui/icons";
 import { useState, useEffect } from "react";
+import { AiOutlineStar, AiOutlineMore } from "react-icons/ai";
 const Projects = () => {
   return (
     <Box>
@@ -21,11 +27,21 @@ const Projects = () => {
         <Heading fontWeight={"400"} size={["md", "lg"]} color={"gray.600"}>
           Projects
         </Heading>
-        <Button color="#fff" display={["none","none","block"]} _hover={{ bg: "blue.400" }} bgColor={"#03A9F4"}>
+        <Button
+          color="#fff"
+          display={["none", "none", "block"]}
+          _hover={{ bg: "blue.400" }}
+          bgColor={"#03A9F4"}
+        >
           CREATE NEW PROJECT
         </Button>
-        <Button display={["block","block","none"]} color="#fff" _hover={{ bg: "blue.400" }} bgColor={"#03A9F4"}>
-          CREATE NEW 
+        <Button
+          display={["block", "block", "none"]}
+          color="#fff"
+          _hover={{ bg: "blue.400" }}
+          bgColor={"#03A9F4"}
+        >
+          CREATE NEW
         </Button>
       </HStack>
       <Grid
@@ -35,8 +51,6 @@ const Projects = () => {
         p="3"
         border={"1px solid #ccced0"}
         templateColumns={["repeat(1, 1fr)", "repeat(1, 1fr)", "repeat(2, 1fr)"]}
-        
-       
       >
         <Grid
           templateColumns={[
@@ -45,36 +59,28 @@ const Projects = () => {
             "repeat(5, 1fr)",
           ]}
           gap={14}
-       
         >
-          <Flex gap="1" display={["none", "none", "block"]}
-         
+          <Flex
+            gap="1"
+            display={["none", "none", "flex"]}
+            alignItems={"center"}
           >
             {" "}
             <Text color={"grey"}>FILTER</Text>
           </Flex>
-          <Flex 
-           
-           justifyContent="center"
-          alignItems={"center"} gap="1">
+          <Flex justifyContent="center" alignItems={"center"} gap="1">
             {" "}
             <Text>Active</Text> <ChevronDownIcon fontSize={"lg"} />
           </Flex>
-          <Flex 
-          justifyContent="center"
-          alignItems={"center"} gap="1">
+          <Flex justifyContent="center" alignItems={"center"} gap="1">
             {" "}
             <Text>Client</Text> <ChevronDownIcon fontSize={"lg"} />
           </Flex>
-          <Flex 
-          justifyContent="center"
-          alignItems={"center"} gap="1">
+          <Flex justifyContent="center" alignItems={"center"} gap="1">
             {" "}
             <Text>Access</Text> <ChevronDownIcon fontSize={"lg"} />
           </Flex>
-          <Flex 
-          justifyContent="center"
-          alignItems={"center"} gap="1">
+          <Flex justifyContent="center" alignItems={"center"} gap="1">
             {" "}
             <Text>Billing</Text> <ChevronDownIcon fontSize={"lg"} />
           </Flex>
@@ -119,7 +125,7 @@ const Projects = () => {
         <Flex bg="#e4eaee" p="3">
           <Text>Projects</Text>
         </Flex>
-        <HStack bg="#fff" justifyContent={"space-between"} pr="14">
+        <HStack color="grey" bg="#fff" justifyContent={"space-between"} pr="14">
           <Flex p="3" alignItems={"center"} gap={2}>
             <Checkbox />
             <Text>Name</Text>
@@ -152,9 +158,12 @@ const Projects = () => {
               <UpDownIcon fontSize={"12"} />
             </Flex>
           </Box>
-          <Box display={["block", "block", "none"]}>
+
+          <Box display={["none", "none", "none"]}>
             <ChevronDownIcon />
           </Box>
+          <Flex p="3" alignItems={"center"} gap={2}></Flex>
+          <Flex p="3" alignItems={"center"} gap={2}></Flex>
         </HStack>
         <DataFetch />
       </Grid>
@@ -177,48 +186,75 @@ const DataFetch = () => {
     <>
       {DataFetch?.length &&
         DataFetch.map((el, index) => (
-          <HStack
-            key={index}
-            bg="#fff"
-            justifyContent={"space-between"}
-            pr="14"
-          >
-            <Flex p="3" alignItems={"center"} gap={2}>
+          <HStack bg="#fff" justifyContent={"space-between"} pr="14">
+            <Flex
+              display={["none", "none", "flex"]}
+              p="3"
+              alignItems={"center"}
+              gap={2}
+            >
               <Checkbox />
-              <Text>{el.name}</Text>
-              <UpDownIcon fontSize={"12"} />
+              <Text>Name</Text>
             </Flex>
 
             <Box display={["none", "none", "block"]}>
               <Flex p="3" alignItems={"center"} gap={2}>
                 <Text>CLIENT</Text>
-                <UpDownIcon fontSize={"12"} />
               </Flex>
             </Box>
             <Box display={["none", "none", "block"]}>
               <Flex p="3" alignItems={"center"} gap={2}>
                 <Text>AMOUNT</Text>
-                <UpDownIcon fontSize={"12"} />
               </Flex>
             </Box>
             <Box display={["none", "none", "block"]}>
               {" "}
               <Flex p="3" alignItems={"center"} gap={2}>
                 <Text>PROGRESS</Text>
-                <UpDownIcon fontSize={"12"} />
               </Flex>
             </Box>
 
             <Box display={["none", "none", "block"]}>
               <Flex p="3" alignItems={"center"} gap={2}>
-                <Text>ACCESS</Text>
-                <UpDownIcon fontSize={"12"} />
+                <Text>ACCESS </Text>
               </Flex>
             </Box>
-            <Box display={["block", "block", "none"]}>
-              <ChevronDownIcon />
+            <Box display={["none", "none", "block"]}>
+              <Flex p="3" alignItems={"center"} gap={8}>
+                <AiOutlineStar />
+                <AiOutlineMore />
+              </Flex>
             </Box>
           </HStack>
+        ))}
+      {DataFetch?.length &&
+        DataFetch.map((el, index) => (
+          <>
+            <Accordion
+              key={index}
+              allowMultiple
+              display={["block", "block", "none"]}
+            >
+              <AccordionItem>
+                <h2>
+                  <AccordionButton gap={"2"}>
+                    <Checkbox m="-1" />
+                    <Box flex="1" textAlign="left">
+                      Section 2 title
+                    </Box>
+
+                    <AccordionIcon />
+                  </AccordionButton>
+                </h2>
+                <AccordionPanel>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                  laboris nisi ut aliquip ex ea commodo consequat.
+                </AccordionPanel>
+              </AccordionItem>
+            </Accordion>
+          </>
         ))}
     </>
   );
