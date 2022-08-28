@@ -15,41 +15,30 @@ import {
 } from "@chakra-ui/react";
 import { LoginGet } from "../../Stores/Auth/auth.actions";
 import GoogleButton from "./Googlebutton";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 export default function LoginCard() {
   const { token } = useSelector((state) => state.authReducer);
+  const { isAuth } = useSelector((state) => state.authReducer);
+  console.log(isAuth ? "Yes" : "No");
+  // console.log();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
-  const toast = useToast();
   const navigate = useNavigate();
+  const location = useLocation();
 
+  const comingFrom = location.state?.from?.pathname || "/";
+  console.log(comingFrom);
   const handleClick = (e) => {
     e.preventDefault();
-    try {
-      dispatch(LoginGet(email, password));
-      toast({
-        title: "Logged-In Successfully!",
-        description: "Start tracking your task & time.",
-        status: "success",
-        duration: 5000,
-        isClosable: true,
-      });
-      navigate("/tracker");
-    } catch (err) {
-      toast({
-        title: "Internal server error",
-        description: "Please try again!",
-        status: "error",
-        duration: 5000,
-        isClosable: true,
-      });
-    }
+    dispatch(LoginGet(email, password));
   };
-  console.log(token);
+  if (isAuth) {
+    navigate(comingFrom, { replace: true });
+  }
   return (
     <Flex minH={"1vh"} align={"center"} justify={"center"}>
       <Stack spacing={8} mx={"auto"} maxW={"2xl"} py={4} px={2}>

@@ -281,7 +281,7 @@ const Homepage = () => {
           w={"280px"}
           h={"56px"}
         >
-          <Link to="/project">
+          <Link to="/tracker">
             <Text fontWeight={400} fontSize={["xs", "md"]}>
               START TRACKING TIME — IT'S FREE!
             </Text>

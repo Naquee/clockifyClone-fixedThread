@@ -109,6 +109,7 @@ const Project = () => {
   const [fav, setFav] = useState(false);
   const dispatch = useDispatch();
   const { projects } = useSelector((state) => state.taskReducer);
+  console.log(projects);
   const handleDelete = (ele) => {
     dispatch(deleteProject(ele._id));
     dispatch(getProjects());
@@ -178,8 +179,12 @@ const Project = () => {
                   </Flex>
                 </Td>
               </Tr>
-              {projects.length > 0 &&
-                projects.map((ele) => (
+              {!projects.length > 0 ? (
+                <Tr>
+                  <Td>No Data</Td>
+                </Tr>
+              ) : (
+                projects?.map((ele) => (
                   <Tr
                     fontSize={"0.9rem"}
                     borderBottom={"1px"}
@@ -228,9 +233,7 @@ const Project = () => {
                                   Archieve
                                 </Button>
                               </MenuItem>
-                              <MenuItem
-                                fontWeight={"bold"}
-                              >
+                              <MenuItem fontWeight={"bold"}>
                                 <Button
                                   size={"sm"}
                                   colorScheme={"red"}
@@ -246,7 +249,8 @@ const Project = () => {
                       </Menu>
                     </Td>
                   </Tr>
-                ))}
+                ))
+              )}
             </Tbody>
           </Table>
         </TableContainer>

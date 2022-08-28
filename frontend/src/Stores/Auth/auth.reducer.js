@@ -49,12 +49,12 @@ export const reducer = (state = initialState, action) => {
         isError: false,
       };
     }
-    case LOGIN_SUCCESS: {
+    case types.LOGIN_SUCCESS: {
+      console.log(action.payload)
       return {
         ...state,
         isLoading: false,
         isAuth: true,
-        // token:action.payload,
         token: setItem("token", action.payload.token),
         username: setItem("user", action.payload.email),
         isError: false,

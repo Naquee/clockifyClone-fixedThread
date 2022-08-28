@@ -227,10 +227,11 @@ const MobileNav = ({ onOpen, ...rest }) => {
             border={"1px solid #8ad9fa"}
             fontSize={["2", "8", "12"]}
             color={"#8ad7fa"}
+            textDecor="none"
             _hover={{ bg: "#8ad7fa", color: "#fff" }}
             p={[1]}
           >
-            UPGRADE
+            <RouterLink to="/upgrade">UPGRADE</RouterLink>
           </Text>
           <Box>
             <IconButton

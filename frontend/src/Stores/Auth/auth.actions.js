@@ -1,5 +1,6 @@
 import axios from "axios";
 import { removeItem } from "../../Utils/localStorage";
+
 import * as types from "./auth.actionTypes";
 import {
   LOGIN_FAILURE,
@@ -56,7 +57,6 @@ export const SignupGet = (email, password) => (dispatch) => {
     });
 };
 export const LoginGet = (email, password) => (dispatch) => {
-  console.log(email, password);
   dispatch(login_req());
   return axios({
     method: "post",
@@ -67,7 +67,9 @@ export const LoginGet = (email, password) => (dispatch) => {
     },
   })
     .then((res) => {
+      console.log(res.data);
       dispatch(login_succ(res.data));
+      // dispatch({type: types.LOGIN_SUCCESS, payload: res.data})
     })
     .catch((err) => {
       dispatch(login_fail());
@@ -81,19 +83,20 @@ export const logout = () => (dispatch) => {
   removeItem("token");
 };
 
-}
-export const Google_oauth =()=>(dispatch)=>{
-    // console.log(email,password);
-    dispatch(login_req());
-    return axios({
-        method:"get",
-        url:"http://localhost:7000/auth/google",
-    }).then((res)=>{
-       console.log(res.data);
-        // dispatch(login_succ(res.data));
-        // localStorage.setItem('token',res.data.token);
-    }).catch((err)=>{
-        dispatch(login_fail());
-        console.log(err);
+export const Google_oauth = () => (dispatch) => {
+  // console.log(email,password);
+  dispatch(login_req());
+  return axios({
+    method: "get",
+    url: "http://localhost:7000/auth/google",
+  })
+    .then((res) => {
+      console.log(res.data);
+      // dispatch(login_succ(res.data));
+      // localStorage.setItem('token',res.data.token);
     })
-}
+    .catch((err) => {
+      dispatch(login_fail());
+      console.log(err);
+    });
+};
