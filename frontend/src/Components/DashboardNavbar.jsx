@@ -52,6 +52,7 @@ const LinkItems = [
   { name: "CLIENTS", icon: VscAccount, path: "/" },
   { name: "TAGS", icon: GrTag, path: "/" },
   { name: "SETTINGS", icon: FiSettings, path: "/" },
+  { name: "UPGRADE", icon: FiSettings, path: "/upgrade" },
 ];
 import { Link as RouterLink } from "react-router-dom";
 import { getItem } from "../Utils/localStorage";
@@ -280,6 +281,7 @@ const MobileNav = ({ onOpen, ...rest }) => {
               <MenuItem>Profile</MenuItem>
               <MenuItem>Settings</MenuItem>
               <MenuItem>Billing</MenuItem>
+              <RouterLink to='/upgrade'><MenuItem>Upgrade</MenuItem></RouterLink>
               <MenuDivider />
               <MenuItem
                 cursor={"pointer"}
