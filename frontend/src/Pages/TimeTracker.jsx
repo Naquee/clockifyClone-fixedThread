@@ -57,6 +57,8 @@ const TimeTracker = () => {
   const [tag, setTag] = useState();
   const [dataStore, setDataStore] = useState([]);
 
+  const [projectId,setProjectId] = useState();
+
   const { isOpen, onOpen, onClose } = useDisclosure();
   const toast = useToast();
 
@@ -155,6 +157,7 @@ const TimeTracker = () => {
       .then((res) => {
         // getTasks();
         console.log(res.data);
+
       })
       .catch((err) => {
         console.log(err);
@@ -196,17 +199,30 @@ const TimeTracker = () => {
       .catch((err) => {
         console.log(err);
       });
+
+      axios
+      .delete(`https://pure-cliffs-12633.herokuapp.com/project/delete/${projectId}`, {
+        headers: {
+          Authorization: "Bearer " + getItem("token"),
+        },
+      })
+      .then((res) => {
+        console.log(res)
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
     <DashboardNavbar>
-      <Stack bg={"#edf2f7"} align={"center"} height={"2xl"}>
+      <Stack bg={"#edf2f7"} align={"center"} width={["auto","auto","100%"]} height={"2xl"}>
         <HStack
           align={"center"}
           height={"70px"}
           bg={"white"}
           border={"1px solid gray"}
-          width={["auto", "auto", "85%"]}
+          width={["auto", "auto", "auto"]}
           marginTop={"30px"}
           mb={20}
         >
@@ -226,7 +242,7 @@ const TimeTracker = () => {
             pr="20px"
             onClick={onOpen}
           >
-            <Flex direction={"row"} gap="2" width={"150px"}>
+            <Flex direction={"row"} gap="2" width={["60px","100px","150px"]}>
               <Image src="https://app.clockify.me/assets/ui-icons/plus-blue.svg" />
               {input2 === "" ? "Projects" : input2}
             </Flex>
@@ -293,11 +309,12 @@ const TimeTracker = () => {
           <Menu isLazy>
             <MenuButton
               align="center"
-              padding={"0px 10px"}
+              size= {["xs","sm","md"]}
+              padding={["0px 4px","0px 6px","0px 10px"]}
               pt={2}
               color={tag === undefined ? "gray.400" : "blue.400"}
             >
-              {tag === undefined ? <Icon as={BsTag} w={8} h={6} /> : tag}
+              {tag === undefined ? <Icon as={BsTag} w={[4,6,8]} h={6} /> : tag}
             </MenuButton>
             <MenuList>
               {/* MenuItems are not rendered unless Menu is open */}
@@ -344,13 +361,14 @@ const TimeTracker = () => {
           >
             <Button
               align="center"
+              size = {["xs","sm","md"]}
               padding={["0px 3px", "0px 6px", "0px 10px"]}
               onClick={() => setBill(!bill)}
               color={bill ? "blue.400" : "gray.400"}
               bg="none"
               _hover={{ bg: "none" }}
             >
-              <Icon as={BiDollar} w={8} h={6} />
+              <Icon as={BiDollar} w={[4,6,8]} h={6} />
             </Button>
           </Tooltip>
           <Divider orientation="vertical" height={"30px"} variant="dashed" />
@@ -360,7 +378,7 @@ const TimeTracker = () => {
             <Flex pl={2} pt={2}>
               {msToTime(watch)}
             </Flex>
-            <Flex>
+            <Flex pl={[2,1.5,1]} pt={[2,1.5,1]}>
               <Button
                 size={["xs", "sm", "md"]}
                 colorScheme={check ? "blue" : "red"}
@@ -383,7 +401,7 @@ const TimeTracker = () => {
             align={"center"}
             bg={"white"}
             height="350px"
-            width={["15%", "23%", "30%"]}
+            width={["auto", "auto", "auto"]}
             gap={2}
             boxShadow={"rgba(0, 0, 0, 0.24) 0px 3px 8px"}
           >
@@ -392,19 +410,19 @@ const TimeTracker = () => {
               align={"center"}
               src="https://app.clockify.me/assets/ui-icons/empty-tracker-icon.webp"
             />
-            <Heading size="lg" align={"center"} fontWeight={"medium"}>
+            <Heading size={["md","lg"]} align={"center"} fontWeight={"medium"}>
               Let's Start Tracking!
             </Heading>
-            <Text size={"sm"} color={"gray.300"}>
+            <Text size={["xs","sm"]} align={"center"} color={"gray.300"}>
               Install Clockify and track time anywhere
             </Text>
             <Flex direction={"row"} gap={1} justify={"center"}>
-              <Icon as={DiAndroid} w={8} h={6} color="gray.400" />
-              <Icon as={DiApple} w={8} h={6} color="gray.400" />
-              <Icon as={DiChrome} w={8} h={6} color="gray.400" />
-              <Icon as={DiWindows} w={8} h={6} color="gray.400" />
+              <Icon as={DiAndroid} w={[4,6,8]} h={6} color="gray.400" />
+              <Icon as={DiApple} w={[4,6,8]} h={6} color="gray.400" />
+              <Icon as={DiChrome} w={[4,6,8]} h={6} color="gray.400" />
+              <Icon as={DiWindows} w={[4,6,8]} h={6} color="gray.400" />
             </Flex>
-            <Text size={"sm"} color={"gray.300"}>
+            <Text size={["xs","sm"]} align={"center"} color={"gray.300"}>
               50+ Integration
             </Text>
           </Flex>
@@ -413,7 +431,7 @@ const TimeTracker = () => {
             direction={"column"}
             align={"center"}
             bg={"white"}
-            width={["30%", "50%", "80%"]}
+            width={["auto", "auto", "80%"]}
             boxShadow={"rgba(0, 0, 0, 0.24) 0px 3px 8px"}
           >
             <Flex
@@ -421,7 +439,7 @@ const TimeTracker = () => {
               justifyContent={"space-between"}
               pt={3}
               mb={-7}
-              w={"95%"}
+              w={["auto","auto","95%"]}
             >
               <Flex>This Week</Flex>
               <Flex>Week Total: {msToTime(totalTime)}</Flex>
