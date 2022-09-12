@@ -19,7 +19,9 @@
     <img src="https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white" alt="mongodb"/>
 </p>
 
-<h3 align="center"><a href="https://fixedthread-clockify.netlify.app"><strong>Want to see live preview »</strong></a></h3>
+
+<h3 align="center"><a href="https://fixedthread-clockify.netlify.app/"><strong>Want to see live preview »</strong></a></h3>
+
 
 <p align="center"> 
     <br />&#10023;
@@ -192,7 +194,7 @@ To run this project, you will need to add the following environment variables to
 
 If you want to contact us, you can reach us through below handles.
 
-<h3>Prajwal Jaiswal - Team Lead</h3>
+<h3>Prajwal Jaiswal - Team Member</h3>
 
 [![linkedin](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/prajwal-jaiswal-3772aa215/)
 [![Github](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/J-Prajwal)
